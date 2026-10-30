@@ -317,7 +317,7 @@ def handle_text_command(text: str):
             import psutil
             cpu = psutil.cpu_percent(interval=0.1)
             ram = psutil.virtual_memory()
-            system_drive = os.environ.get("SystemDrive", "C:") + "\\"
+            system_drive = (os.environ.get("SystemDrive", "C:") + "\\") if os.name == "nt" else "/"
             disk = psutil.disk_usage(system_drive)
             battery = psutil.sensors_battery() if hasattr(psutil, "sensors_battery") else None
 
@@ -340,7 +340,7 @@ def handle_text_command(text: str):
                 "battery_plugged": battery.power_plugged if battery else None,
             }
         except Exception:
-            pass
+            logger.exception("System status check failed")
 
     # 5. Screenshot
     if "screenshot" in clean or "take a picture" in clean or "capture screen" in clean:
