@@ -29,7 +29,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='JARVIS-Retro',
+    name='Do-Voice',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

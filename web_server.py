@@ -118,10 +118,6 @@ def _voice_command_allowed(text):
 def _read_notes():
     try:
         path = _notes_path()
-        if not path.exists():
-            legacy_path = path.parent.parent / "JARVIS" / "notes.json"
-            if legacy_path.exists():
-                path = legacy_path
         data = json.loads(path.read_text(encoding="utf-8"))
         return data if isinstance(data, list) else []
     except FileNotFoundError:
@@ -157,9 +153,9 @@ def _run_voice_worker():
     try:
         # Import inside the listener thread so Windows speech/TTS initializes
         # on the same thread that owns the microphone loop.
-        from jarvis import run_jarvis
+        from do_assistant import run_voice_assistant
 
-        run_jarvis(
+        run_voice_assistant(
             voice_stop_event,
             status_callback=_set_voice_message,
             transcript_callback=_record_voice_transcript,
@@ -231,14 +227,14 @@ def handle_text_command(text: str):
     )
     if any(term in clean for term in command_terms):
         try:
-            from jarvis import normalize_voice_command
+            from do_assistant import normalize_voice_command
             clean = normalize_voice_command(clean)
         except Exception:
             logger.exception("Could not normalize a natural-language command")
 
     if clean == "close youtube":
         try:
-            from jarvis import close_youtube_tab
+            from do_assistant import close_youtube_tab
             if close_youtube_tab():
                 return "Closed the active YouTube tab."
             return "Bring the YouTube tab to the front first, then ask me to close it."
@@ -258,7 +254,7 @@ def handle_text_command(text: str):
     # 2. YouTube & Music playback
     if clean == "open youtube and play":
         try:
-            from jarvis import open_system_app
+            from do_assistant import open_system_app
             threading.Thread(target=open_system_app, args=("youtube",), daemon=True).start()
         except Exception:
             logger.exception("Could not open YouTube")
@@ -300,7 +296,7 @@ def handle_text_command(text: str):
         if app:
             def _open():
                 try:
-                    from jarvis import open_system_app
+                    from do_assistant import open_system_app
                     open_system_app(app)
                 except Exception:
                     import webbrowser
@@ -351,7 +347,7 @@ def handle_text_command(text: str):
         try:
             import pyautogui
             import datetime
-            filename = f"jarvis_screenshot_{datetime.datetime.now():%Y%m%d_%H%M%S_%f}.png"
+            filename = f"do_screenshot_{datetime.datetime.now():%Y%m%d_%H%M%S_%f}.png"
             filepath = Path(ROOT) / filename
             pyautogui.screenshot(str(filepath))
             return {
@@ -399,7 +395,7 @@ def handle_text_command(text: str):
     return None
 
 
-class JarvisHandler(SimpleHTTPRequestHandler):
+class DoRequestHandler(SimpleHTTPRequestHandler):
     protocol_version = "HTTP/1.1"
 
     def __init__(self, *args, **kwargs):
@@ -745,7 +741,7 @@ def create_server(port=PORT):
     """Create the local-only frontend and Gemini API server."""
     if HOSTED_MODE and not os.getenv("DO_ACCESS_CODE"):
         raise RuntimeError("DO_ACCESS_CODE is required when DO_HOSTED_MODE is enabled.")
-    return ThreadingHTTPServer((HOST, port), JarvisHandler)
+    return ThreadingHTTPServer((HOST, port), DoRequestHandler)
 
 
 if __name__ == "__main__":

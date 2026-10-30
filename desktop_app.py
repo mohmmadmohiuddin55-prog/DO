@@ -138,7 +138,7 @@ def main():
         threading.Thread(target=tray_icon.run, daemon=True, name="do-tray").start()
 
         # Setup Global Hotkey Thread
-        threading.Thread(target=run_hotkey_listener, args=(toggle_window, stop_hotkey), daemon=True, name="jarvis-hotkeys").start()
+        threading.Thread(target=run_hotkey_listener, args=(toggle_window, stop_hotkey), daemon=True, name="do-hotkeys").start()
 
         window.events.closed += lambda: on_tray_exit(tray_icon, None)
         webview.start(debug=False)

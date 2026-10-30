@@ -198,7 +198,7 @@ desktop_app.py          Windows desktop window, tray icon, and global hotkeys
 do_cli.py               Cross-platform command-line chat and setup commands
 pyproject.toml          Python package metadata and `do` command entry point
 web_server.py           Loopback web server, Gemini chat bridge, voice status, and local notes
-jarvis.py               Speech recognition, text-to-speech, and desktop command handlers
+do_assistant.py         Speech recognition, text-to-speech, and desktop command handlers
 language_filter.py      Offline English-input heuristic
 frontend/index.html     Do interface structure
 frontend/app.js         Chat, notes, voice controls, command palette, and reply rendering
@@ -208,7 +208,7 @@ requirements-desktop.txt Python and desktop dependencies
 .env.example            Safe example configuration; add real credentials to a private .env
 ```
 
-The `jarvis.py` filename is a legacy module name; the application is branded Do and does not use a wake word.
+The application is branded Do and does not use a wake word.
 
 ## A future for Do and AI
 

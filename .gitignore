@@ -8,8 +8,8 @@
 __pycache__/
 build/
 dist/
-jarvis_screenshot.png
-jarvis_screenshot_*.png
+do_screenshot.png
+do_screenshot_*.png
 *.log
 .python-version
 *.py[cod]

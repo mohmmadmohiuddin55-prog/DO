@@ -31,7 +31,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='JARVIS-TVA-Clock',
+    name='Do-TVA-Clock',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

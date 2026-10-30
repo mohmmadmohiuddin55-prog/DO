@@ -391,7 +391,7 @@ def get_ai_response(user_input):
 
 
 # 8. Main Execution Loop
-def run_jarvis(stop_event=None, status_callback=None, transcript_callback=None, permission_callback=None):
+def run_voice_assistant(stop_event=None, status_callback=None, transcript_callback=None, permission_callback=None):
     global voice_status_callback
     voice_status_callback = status_callback
     show_status("BOOT SEQUENCE")
@@ -494,7 +494,7 @@ def run_jarvis(stop_event=None, status_callback=None, transcript_callback=None, 
 
                 # Screenshot
                 elif "screenshot" in query or "take a picture" in query:
-                    pyautogui.screenshot("jarvis_screenshot.png")
+                    pyautogui.screenshot("do_screenshot.png")
                     speak("Screenshot captured.")
 
                 # Volume Controls
@@ -577,7 +577,7 @@ def run_jarvis(stop_event=None, status_callback=None, transcript_callback=None, 
                     filename = safe_filename(filename)
 
                     with open(filename, "w", encoding="utf-8") as f:
-                        f.write("# File created by Jarvis\n")
+                        f.write("# File created by Do\n")
                     speak(f"Created file {filename}. Opening now.")
                     try:
                         os.startfile(filename)
@@ -651,4 +651,4 @@ def run_jarvis(stop_event=None, status_callback=None, transcript_callback=None, 
 
 
 if __name__ == "__main__":
-    run_jarvis()
+    run_voice_assistant()
