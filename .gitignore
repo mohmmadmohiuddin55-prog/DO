@@ -1,0 +1,16 @@
+.env
+.env.*
+!.env.example
+.venv/
+.venv-desktop/
+.venv-do/
+*.egg-info/
+__pycache__/
+build/
+dist/
+jarvis_screenshot.png
+jarvis_screenshot_*.png
+*.log
+.python-version
+*.py[cod]
+*$py.class

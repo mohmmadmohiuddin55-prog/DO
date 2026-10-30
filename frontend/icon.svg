@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#080d18"/>
+  <circle cx="256" cy="256" r="172" fill="none" stroke="#45e5ff" stroke-width="8" opacity=".72"/>
+  <ellipse cx="256" cy="256" rx="202" ry="64" fill="none" stroke="#ffb25c" stroke-width="5" transform="rotate(-22 256 256)"/>
+  <circle cx="256" cy="256" r="112" fill="#102c45" stroke="#75efff" stroke-width="5"/>
+  <text x="256" y="283" text-anchor="middle" fill="#e9fbff" font-family="Arial,sans-serif" font-size="108" font-weight="700" letter-spacing="20">DO</text>
+</svg>

@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#09090b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Do | Personal Intelligence</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <meta name="description" content="Do personal intelligence command deck">
+  <link rel="stylesheet" href="obsidian.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="side-rail" id="sideRail">
+    <header class="masthead">
+      <div class="header-stamp">PERSONAL ASSISTANT</div>
+      <h1>DO</h1>
+      <p class="subtitle">Your desktop, in one place</p>
+      <div class="header-status"><span class="status-light"></span><span>CORE ONLINE</span><span class="status-divider"></span><time id="clock">--:--:--</time></div>
+      <div class="install-control"><button id="installButton" type="button" hidden>INSTALL DO</button><span id="installHint" aria-live="polite"></span></div>
+      <button id="sidebarToggle" class="sidebar-toggle" type="button" aria-label="Collapse sidebar" aria-expanded="true" title="Collapse sidebar">‹</button>
+    </header>
+
+    <nav class="side-navigation" aria-label="Do workspace navigation">
+      <button class="nav-item active" type="button" data-view="chat"><span>⌂</span> New conversation</button>
+      <button class="nav-item" type="button" data-view="memory"><span>◈</span> Memory vault</button>
+      <button class="nav-item" type="button" data-view="voice"><span>◉</span> Voice activity</button>
+      <button class="nav-item" type="button" data-view="settings"><span>⚙</span> Settings</button>
+      <p class="nav-caption">YOUR SPACE</p>
+      <div class="recent-item"><i></i><span>Do command channel</span></div>
+      <div class="rail-spacer"></div>
+      <div class="rail-identity"><span class="identity-mark">D</span><span><b>DO // PERSONAL</b><small>ENGLISH · PRIVATE</small></span><span class="identity-state"></span></div>
+    </nav>
+
+    <section class="agent-stage" id="agentStage" aria-label="Do assistant status">
+      <div class="agent-row">
+        <div class="agent-face" id="agentFace" aria-hidden="true"><span>D</span></div>
+        <div class="agent-summary"><strong>Do assistant</strong><span id="aiStatus">CHECKING GEMINI</span></div>
+        <span class="agent-presence" aria-label="Core online"></span>
+      </div>
+      <div class="audio-visualizer" id="audioVisualizer" aria-hidden="true">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+      <div class="agent-status"><span class="status-light"></span><strong id="voiceStatus">VOICE STANDBY</strong></div>
+      <p class="agent-hint" id="voiceHint">Click start and speak English.</p>
+      <button class="voice-toggle" id="voiceButton" type="button" aria-pressed="false"><span class="mic-icon" aria-hidden="true">◖</span><span id="voiceButtonText">START VOICE</span><kbd>Ctrl Space</kbd></button>
+      <section class="voice-debug" aria-label="Recent voice commands">
+        <header><strong>VOICE TEST LOG</strong><span>LAST 10 PHRASES</span></header>
+        <ol id="voiceHistory"><li>Start voice mode and say a command. Do will show what it heard here.</li></ol>
+      </section>
+      <div class="stage-foot"><span>VOICE HOTKEY <b>CTRL + SPACE</b></span><span>ENGLISH ONLY</span></div>
+    </section>
+
+    </aside>
+    <main class="workspace">
+      <header class="workspace-topbar">
+        <div><span class="topbar-kicker">DO / PERSONAL INTELLIGENCE</span><h2 id="workspaceTitle">New conversation</h2></div>
+        <div class="topbar-actions"><button class="command-trigger" id="commandTrigger" type="button" aria-haspopup="dialog"><span>Search actions…</span><kbd>Ctrl K</kbd></button><div class="topbar-meta"><span class="status-light"></span><span id="workspaceLink">LOCAL CORE</span><time id="clockMirror">--:--</time></div></div>
+      </header>
+
+    <section class="comms-panel" aria-label="Conversation with Do">
+      <div class="chat-log" id="chatLog" aria-live="polite" aria-label="Conversation">
+        <article class="message agent-message"><span class="sender">DO // CORE <time>NOW</time></span><p id="welcomeMessage">Command deck online. Open the voice channel or send an English request to begin.</p></article>
+      </div>
+      <div class="starter-suggestions" id="starterSuggestions" aria-label="Try a starter prompt">
+        <button type="button" data-prompt="Help me plan my day">Plan my day</button>
+        <button type="button" data-prompt="Explain a topic in simple steps">Learn something</button>
+        <button type="button" data-prompt="What can you do on this computer?">Explore Do</button>
+      </div>
+      <div class="quick-actions-bar" aria-label="Quick Actions Toolbar">
+        <span class="quick-label">QUICK:</span>
+        <button type="button" class="action-chip" data-cmd="system status"><span>📊</span> Gauges</button>
+        <button type="button" class="action-chip" data-cmd="play lofi hip hop"><span>🎵</span> Lofi</button>
+        <button type="button" class="action-chip" data-cmd="screenshot"><span>📸</span> Snip</button>
+        <button type="button" class="action-chip" data-cmd="open youtube"><span>🌐</span> YouTube</button>
+        <button type="button" class="action-chip" data-cmd="open notepad"><span>📝</span> Notepad</button>
+        <button type="button" class="action-chip" data-cmd="what time is it"><span>⏱️</span> Time</button>
+      </div>
+      <form class="chat-form" id="chatForm">
+        <span class="prompt-mark" aria-hidden="true">›</span>
+        <textarea id="chatInput" rows="1" placeholder="Write a message to Do…" aria-label="Message Do" maxlength="4000"></textarea>
+        <button type="submit" id="sendButton">SEND <span aria-hidden="true">↗</span></button>
+      </form>
+      <footer class="comms-foot"><span>ENTER TO SEND <i>·</i> SHIFT + ENTER FOR NEW LINE</span><span id="chatStatus">GEMINI CHAT</span></footer>
+    </section>
+
+    <section class="notes-panel" id="memoryView" aria-labelledby="notesTitle" hidden>
+      <header class="notes-header"><div><h2 id="notesTitle">MEMORY VAULT</h2><p id="notesStorageHint">Personal data · stored locally</p></div><span id="notesCount">0 NOTES</span></header>
+      <form class="notes-form" id="notesForm">
+        <label class="visually-hidden" for="noteInput">Write a note</label>
+        <textarea id="noteInput" rows="3" maxlength="4000" placeholder="Save an idea, reminder, or project detail…"></textarea>
+        <button type="submit" id="saveNoteButton">SAVE NOTE <span aria-hidden="true">＋</span></button>
+      </form>
+      <p class="notes-status" id="notesStatus" aria-live="polite">Your notes stay in your local Do data folder.</p>
+      <div class="notes-list" id="notesList" aria-live="polite"></div>
+    </section>
+
+    <section class="settings-panel" id="settingsView" aria-labelledby="settingsTitle" hidden>
+      <header class="settings-heading"><div><span class="topbar-kicker">DO / PREFERENCES</span><h2 id="settingsTitle">Settings</h2></div><span id="settingsSaveStatus" aria-live="polite">Settings stay on this device.</span></header>
+      <div class="settings-layout">
+        <nav class="settings-nav" aria-label="Settings categories">
+          <button class="settings-tab active" type="button" data-settings-tab="general">General</button>
+          <button class="settings-tab" type="button" data-settings-tab="permissions">Permissions</button>
+          <button class="settings-tab" type="button" data-settings-tab="about">About Do</button>
+        </nav>
+        <div class="settings-content">
+          <section class="settings-page active" id="settings-general" data-settings-page="general">
+            <h3>General</h3>
+            <p class="settings-intro">Choose how Do looks and responds on this device.</p>
+            <div class="settings-row theme-row"><div><b>Appearance</b><small>Choose a light or dark look for Do.</small></div><div class="theme-options" role="group" aria-label="Appearance">
+              <button type="button" class="theme-choice" data-theme-choice="light" aria-pressed="false"><span aria-hidden="true">☼</span> Light</button>
+              <button type="button" class="theme-choice active" data-theme-choice="dark" aria-pressed="true"><span aria-hidden="true">☾</span> Dark</button>
+            </div></div>
+            <div class="settings-row"><div><b>Language</b><small>Voice input and Do’s interface language.</small></div><span class="settings-pill">ENGLISH ONLY</span></div>
+            <label class="settings-row"><span><b>Enter sends</b><small>Press Enter to send; Shift + Enter creates a new line.</small></span><input class="settings-switch" id="enterToSendSetting" type="checkbox" checked></label>
+            <label class="settings-row"><span><b>Show voice test log</b><small>Keep the latest ten recognized English phrases visible.</small></span><input class="settings-switch" id="showVoiceLogSetting" type="checkbox" checked></label>
+            <div class="settings-row"><div><b>Start layout</b><small>Do opens directly to your conversation workspace.</small></div><span class="settings-pill">FULL VIEW</span></div>
+          </section>
+
+          <section class="settings-page" id="settings-permissions" data-settings-page="permissions" hidden>
+            <h3>Permissions</h3>
+            <p class="settings-intro">Manage which Do features can use this computer. Changes apply immediately.</p>
+            <div class="permission-summary"><div><b>Full access</b><small>Enable every supported Do permission on this device.</small></div><input class="settings-switch" id="fullAccessSetting" type="checkbox"></div>
+            <div id="permissionControls">
+              <label class="settings-row"><span><b>Microphone</b><small>Allow voice listening after you press Start Voice.</small></span><input class="settings-switch" type="checkbox" data-permission="microphone"></label>
+              <label class="settings-row"><span><b>Desktop controls</b><small>Open apps and websites, control media, and change volume.</small></span><input class="settings-switch" type="checkbox" data-permission="desktopControl"></label>
+              <label class="settings-row"><span><b>Screen capture</b><small>Let Do take a screenshot when you ask.</small></span><input class="settings-switch" type="checkbox" data-permission="screenCapture"></label>
+              <label class="settings-row"><span><b>File actions</b><small>Let Do create files and save requested research reports.</small></span><input class="settings-switch" type="checkbox" data-permission="fileActions"></label>
+              <label class="settings-row"><span><b>Power controls</b><small>Allow commands to lock or put this PC to sleep.</small></span><input class="settings-switch" type="checkbox" data-permission="powerActions"></label>
+              <label class="settings-row"><span><b>Email reading</b><small>Allow the configured Gmail voice command to read recent mail.</small></span><input class="settings-switch" type="checkbox" data-permission="emailAccess"></label>
+              <label class="settings-row"><span><b>Gemini AI</b><small>Send your chat requests to Google Gemini for an answer.</small></span><input class="settings-switch" type="checkbox" data-permission="gemini"></label>
+            </div>
+            <p class="permission-footnote" id="hostedPermissionsNote" hidden>Hosted Do runs on a server. It cannot access this device’s microphone, files, or desktop controls. These permissions are managed in the local Windows app.</p>
+            <p class="permission-footnote">Full access only enables the actions Do already supports. It does not grant Do unrestricted access to every file or app on your computer.</p>
+          </section>
+
+          <section class="settings-page" id="settings-about" data-settings-page="about" hidden>
+            <h3>About Do</h3>
+            <p class="settings-intro">Personal intelligence, with controls you can review.</p>
+            <div class="about-card"><span class="identity-mark">D</span><div><b>Do · Personal Assistant</b><small>English interface · local voice controls · Gemini chat</small></div></div>
+            <div class="settings-row"><div><b>Voice shortcuts</b><small>Ctrl + Space or Alt + J opens Do. Voice listening starts only when you choose it.</small></div></div>
+            <div class="settings-row"><div><b>Privacy</b><small>Notes stay local. Gemini chat is sent to Google when Gemini AI is enabled. Voice recognition uses an online speech service.</small></div></div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <footer class="app-footer"><span>DO <i>PERSONAL INTELLIGENCE</i></span><span>LOCAL COMMAND DECK <b>·</b> WINDOWS</span><span>SYS. 01 <b>◆</b></span></footer>
+    </main>
+  </div>
+  <div class="access-gate" id="accessGate" hidden role="dialog" aria-modal="true" aria-labelledby="accessTitle">
+    <form class="access-card" id="accessForm">
+      <p class="header-stamp">DO PRIVATE WEB INSTANCE</p>
+      <h2 id="accessTitle">ACCESS CODE REQUIRED</h2>
+      <p>Enter the code shared by the Do site owner.</p>
+      <label for="accessCodeInput">SITE ACCESS CODE</label>
+      <input id="accessCodeInput" type="password" autocomplete="current-password" required>
+      <button type="submit" id="accessSubmit">UNLOCK DO</button>
+      <p id="accessMessage" aria-live="polite"></p>
+    </form>
+  </div>
+  <div class="palette-backdrop" id="commandPalette" hidden>
+    <section class="command-palette" role="dialog" aria-modal="true" aria-labelledby="paletteTitle">
+      <header class="palette-search"><span aria-hidden="true">⌕</span><label class="visually-hidden" id="paletteTitle" for="paletteInput">Search Do actions</label><input id="paletteInput" type="search" placeholder="Search commands and actions…" autocomplete="off"><kbd>ESC</kbd></header>
+      <div class="palette-section-label">SUGGESTED ACTIONS</div>
+      <div class="palette-results" id="paletteResults" role="listbox" aria-label="Do actions">
+        <button type="button" class="palette-item" data-palette-action="view:chat"><span class="palette-icon">↗</span><span>New conversation<small>Start a fresh chat</small></span><kbd>↵</kbd></button>
+        <button type="button" class="palette-item" data-palette-action="voice"><span class="palette-icon">◖</span><span>Toggle voice listening<small>Start or stop the microphone</small><kbd>Ctrl Space</kbd></span></button>
+        <button type="button" class="palette-item" data-palette-action="view:memory"><span class="palette-icon">◇</span><span>Open memory vault<small>Review saved notes</small></span></button>
+        <button type="button" class="palette-item" data-palette-action="view:settings"><span class="palette-icon">⚙</span><span>Open settings<small>Manage Do preferences</small></span></button>
+        <button type="button" class="palette-item" data-palette-action="open YouTube"><span class="palette-icon">▶</span><span>Open YouTube<small>Launch a website or app</small></span></button>
+        <button type="button" class="palette-item" data-palette-action="open Notepad"><span class="palette-icon">▤</span><span>Open Notepad<small>Launch a desktop application</small></span></button>
+        <button type="button" class="palette-item" data-palette-action="system status"><span class="palette-icon">◫</span><span>System status<small>View hardware telemetry</small></span></button>
+        <button type="button" class="palette-item" data-palette-action="screenshot"><span class="palette-icon">▣</span><span>Take a screenshot<small>Capture the current desktop</small></span></button>
+        <button type="button" class="palette-item" data-palette-action="volume up"><span class="palette-icon">◖</span><span>Turn volume up<small>Adjust system audio</small></span></button>
+        <button type="button" class="palette-item" data-palette-action="play lofi hip hop"><span class="palette-icon">♫</span><span>Play lo-fi music<small>Start YouTube music</small></span></button>
+      </div>
+      <p class="palette-empty" id="paletteEmpty" hidden>No matching actions.</p>
+      <footer class="palette-footer"><span><kbd>↑</kbd><kbd>↓</kbd> to navigate</span><span><kbd>↵</kbd> to run <b>·</b> <kbd>Esc</kbd> to close</span></footer>
+    </section>
+  </div>
+</body>
+</html>
